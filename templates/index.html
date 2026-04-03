@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zomato AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 36px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .card {
+            width: 350px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: fadeIn 1s ease;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff4b2b;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 28px;
+            text-align: center;
+            font-weight: bold;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px white; }
+            to { text-shadow: 0 0 25px #00f2ff; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h1>🍔 Zomato AI Predictor</h1>
+
+<div class="card">
+
+<form action="/predict" method="post">
+
+    <input type="number" name="votes" placeholder="👥 Votes" required>
+    <input type="number" name="cost" placeholder="💰 Cost for two" required>
+
+    <select name="online_order">
+        <option value="1">📦 Online Order Yes</option>
+        <option value="0">📦 Online Order No</option>
+    </select>
+
+    <select name="book_table">
+        <option value="1">📅 Book Table Yes</option>
+        <option value="0">📅 Book Table No</option>
+    </select>
+
+    <select name="type">
+        <option value="Dining">🍽 Dining</option>
+        <option value="Cafes">☕ Cafes</option>
+        <option value="Buffet">🥗 Buffet</option>
+        <option value="other">🍴 Other</option>
+    </select>
+
+    <button type="submit">🚀 Predict</button>
+
+</form>
+
+{% if result %}
+<div class="result">
+    ⭐ {{ result }}
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
